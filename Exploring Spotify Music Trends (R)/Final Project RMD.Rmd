@@ -1,0 +1,309 @@
+---
+title: "Fantasy Football 23-24 trends"
+output:
+  pdf_document: default
+  word_document: default
+date: "2023-05-25"
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(NbClust)
+library(mclust)
+library(knitr)
+library(MASS)
+library(flexclust)
+library(cluster)
+library(fpc)
+library(ggplot2)
+library(dplyr)
+library(reshape2)
+```
+
+## 1. Project Overview. 
+
+## 2. Data and Resources Used.
+
+```{r echo=FALSE}
+
+
+SP2000 <- read.csv('Spotify-2000.csv')
+SP2000$Title <- factor(SP2000$Title)
+
+SP2000$Artist <- factor(SP2000$Artist)
+SP2000$Top.Genre <- factor(SP2000$Top.Genre)
+SP2000$Year <- factor(SP2000$Year)
+suppressWarnings(SP2000$Length..Duration <- as.numeric(SP2000$Length..Duration))
+
+
+SP2000 <- na.omit(SP2000)
+SP2000 <- SP2000[,-c(7,8,10,11,12,13)]
+
+SP2000$YearNumber <- as.numeric(SP2000$Year)+1
+
+SP2000$YearNumber[SP2000$YearNumber == 2] <- SP2000$YearNumber[SP2000$YearNumber == 2] - 1
+
+
+```
+
+
+
+```{r echo=FALSE}
+Data.Clust.SP2000 <- SP2000[,-c(1,2,3,4,5,8,9,11)]
+Data.Clust.SP2000.scaled <- scale(Data.Clust.SP2000)
+
+wssplot <- function(data, nc=25, seed=1234){
+               wss <- (nrow(data)-1)*sum(apply(data,2,var))
+               for (i in 2:nc){
+                    set.seed(seed)
+                    wss[i] <- sum(kmeans(data, centers=i)$withinss)}
+                plot(1:nc, wss, type="b", xlab="Number of Clusters",
+                     ylab="Within groups sum of squares")
+}
+wssplot(Data.Clust.SP2000.scaled)
+```
+
+
+```{r echo=FALSE}
+RNGversion("4.1.2")
+
+set.seed(1234)
+
+Km.6clust <- kmeans(Data.Clust.SP2000.scaled, 6, nstart = 25)
+
+Km.6clust$size
+
+```
+
+
+```{r echo=FALSE}
+RNGversion("4.1.2")
+
+set.seed(1234)
+cont.table <- table(SP2000$Year, Km.6clust$cluster)
+
+cont.df <- as.data.frame.table(cont.table)
+
+
+
+ggplot(cont.df, aes(x = Var1, y = Var2, fill = Freq)) +
+  geom_tile() +
+  scale_fill_gradient(low = "white", high = "darkred") +
+  scale_x_discrete(breaks = unique(cont.df$Var1[seq(1, length(unique(cont.df$Var1)), by = 10)])) +
+  labs(x = "Year", y = "Cluster", title = "Cluster Distribution Heatmap")
+
+```
+
+```{r echo=FALSE}
+ggplot(cont.df, aes(x = Var1, y = Freq, color = Var2, group = Var2)) +
+  geom_line() +
+  scale_x_discrete(breaks = unique(cont.df$Var1[seq(1, length(unique(cont.df$Var1)), by = 10)])) +
+  labs(x = "Year", y = "Count", title = "Cluster Distribution Over Time")
+```
+
+```{r echo=FALSE}
+RNGversion("4.1.2")
+set.seed(1234)
+
+
+
+
+# Run PAM model
+PAM.6clust <- pam(Data.Clust.SP2000.scaled, k = 6, diss = FALSE, nstart = 25)
+
+cont.table.PAM <- table(SP2000$Year, PAM.6clust$cluster)
+
+cont.df.PAM <- as.data.frame.table(cont.table.PAM)
+
+ggplot(cont.df.PAM, aes(x = Var1, y = Var2, fill = Freq)) +
+  geom_tile() +
+  scale_fill_gradient(low = "white", high = "darkred") +
+  scale_x_discrete(breaks = unique(cont.df.PAM$Var1[seq(1, length(unique(cont.df.PAM$Var1)), by = 10)])) +
+  labs(x = "Year", y = "Cluster", title = "Cluster Distribution Heatmap")
+
+```
+
+```{r echo=FALSE}
+ggplot(cont.df.PAM, aes(x = Var1, y = Freq, color = Var2, group = Var2)) +
+  geom_line() +
+  scale_x_discrete(breaks = unique(cont.df.PAM$Var1[seq(1, length(unique(cont.df.PAM$Var1)), by = 10)])) +
+  labs(x = "Year", y = "Count", title = "Cluster Distribution Over Time")
+
+```
+
+```{r}
+fit.BPM  <- lm(YearNumber ~ Beats.Per.Minute..BPM., data = SP2000)
+
+
+
+summary.table.BPM <- summary(fit.BPM)$coefficients[, c("Estimate", "Std. Error", "t value", "Pr(>|t|)")]
+
+summary.table.BPM
+
+```
+
+```{r}
+
+
+ggplot(data = SP2000, aes(x = Year, y = Beats.Per.Minute..BPM.)) +
+  geom_boxplot() +
+  xlab("Year") +
+  ylab("Beats Per Minute") +
+  ggtitle("Distribution of Beats Per Minute by Year") +
+  scale_x_discrete(labels = function(x) ifelse(as.numeric(x) %% 10 == 0, x, ""))
+
+```
+
+```{r}
+fit.Length  <- lm(YearNumber~ Length..Duration, data = SP2000)
+
+summary.table.Length <- summary(fit.Length)$coefficients[, c("Estimate", "Std. Error", "t value", "Pr(>|t|)")]
+
+summary.table.Length
+```
+
+```{r}
+
+ggplot(data = SP2000, aes(x = Year, y = Length..Duration)) +
+  geom_boxplot() +
+  xlab("Year") +
+  ylab("Length (Sec)") +
+  ggtitle("Distribution of Length by Year") +
+  scale_x_discrete(labels = function(x) ifelse(as.numeric(x) %% 10 == 0, x, ""))
+```
+
+```{r}
+ggplot(data = SP2000, aes(x = Year, y = Length..Duration)) +
+  geom_boxplot() +
+  xlab("Year") +
+  ylab("Length (Sec)") +
+  ggtitle("Distribution of Length by Year") +
+  scale_x_discrete(labels = function(x) ifelse(as.numeric(x) %% 10 == 0, x, "")) +
+  coord_cartesian(ylim = c(150, 400))
+```
+
+```{r}
+SP2000.After1980 <- SP2000[SP2000$YearNumber > 24, ]
+
+
+fit.Length2  <- lm(YearNumber~ Length..Duration, data = SP2000.After1980)
+
+summary.table.Length2 <- summary(fit.Length2)$coefficients[, c("Estimate", "Std. Error", "t value", "Pr(>|t|)")]
+
+summary.table.Length2
+```
+
+
+```{r}
+ggplot(data = SP2000.After1980, aes(x = Year, y = Length..Duration)) +
+  geom_boxplot() +
+  xlab("Year") +
+  ylab("Length (Sec)") +
+  ggtitle("Distribution of Length by Year, Starting at 1980") +
+  scale_x_discrete(labels = function(x) ifelse(as.numeric(x) %% 10 == 0, x, "")) +
+  coord_cartesian(ylim = c(150, 400))
+
+```
+
+```{r}
+fit.Decibel.Level  <- lm(YearNumber ~ Loudness..dB., data = SP2000)
+
+summary.table.Decibel.Level <- summary(fit.Decibel.Level)$coefficients[, c("Estimate", "Std. Error", "t value", "Pr(>|t|)")]
+
+summary.table.Decibel.Level
+```
+
+```{r}
+ggplot(data = SP2000, aes(x = Year, y = Loudness..dB.)) +
+  geom_boxplot() +
+  xlab("Year") +
+  ylab("Loudness (dB)") +
+  ggtitle("Distribution of Loudness (dB) by Year") +
+  scale_x_discrete(labels = function(x) ifelse(as.numeric(x) %% 10 == 0, x, ""))
+
+```
+
+```{r}
+
+
+fit.BPM.DB.Len.Gen.Spe <- lm(Popularity ~ Beats.Per.Minute..BPM. + Loudness..dB. + Length..Duration + Top.Genre +Speechiness, data = SP2000)
+
+
+summary.table.fit.BPM.DB.Len.Gen.Spe <- summary(fit.BPM.DB.Len.Gen.Spe)$coefficients[, c("Estimate", "Std. Error", "t value", "Pr(>|t|)")]
+
+
+summary.table.fit.BPM.DB.Len.Gen.Spe
+
+
+
+```
+
+```{r}
+fit.DB.Len.Gen.Spe <- lm(Popularity ~  Loudness..dB. + Length..Duration + Speechiness, data = SP2000)
+
+summary.table.fit.DB.Len.Gen.Spe <- summary(fit.DB.Len.Gen.Spe)$coefficients[, c("Estimate", "Std. Error", "t value", "Pr(>|t|)")]
+
+summary.table.fit.DB.Len.Gen.Spe
+
+```
+
+```{r}
+
+ggplot(data = SP2000, aes(x = Popularity, y = Length..Duration)) +
+  geom_boxplot(aes(group = cut_width(Popularity, width = 3))) +
+  xlab("Popularity") +
+  ylab("Length (Sec)") +
+  ggtitle("Distribution of Length by Popularity") +
+  scale_x_continuous(labels = function(x) ifelse(x %% 3 == 0, x, "")) 
+
+```
+
+```{r}
+
+ggplot(data = SP2000, aes(x = Popularity, y = Loudness..dB.)) +
+  geom_boxplot(aes(group = cut_width(Popularity, width = 3))) +
+  xlab("Popularity") +
+  ylab("Loudness (dB)") +
+  ggtitle("Distribution of Length by Popularity") +
+  scale_x_continuous(labels = function(x) ifelse(x %% 3 == 0, x, "")) 
+
+```
+
+```{r}
+
+ggplot(data = SP2000, aes(x = Popularity, y = Speechiness)) +
+  geom_boxplot(aes(group = cut_width(Popularity, width = 3))) +
+  xlab("Popularity") +
+  ylab("Speechiness") +
+  ggtitle("Distribution of Length by Popularity") +
+  scale_x_continuous(labels = function(x) ifelse(x %% 3 == 0, x, "")) 
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
