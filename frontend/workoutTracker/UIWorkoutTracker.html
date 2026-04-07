@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="/workoutTracker/UIWorkoutTracker.css">
+        <title>Workout Tracker</title>
+    </head>
+    <!--<header>
+        <h1>Track Your Workouts</h1>
+    </header>-->
+    <body>    
+        <!--<div class="header">
+            <h1>Track Your Workouts</h1>
+        </div>-->
+    <div class="main-page">
+        <div class="header">
+            <h1>Track Your Workouts</h1>
+        </div>
+        <div class="form">
+        <form id="input">
+            <div id="activity-dropdown">
+                <label for="activity">Activity Type?</label>
+                <select name="activity-dropdown" id="activity">
+                    <option value="run">Run</option>
+                    <option value="bike">Bike</option>
+                    <option value="weightlift">Weightlift</option>
+                    <option value="swim">Swim</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+            <div id="duration-input">
+                <label for="duration">Duration (in minutes):</label>
+                <input type="number" id="duration" name="duration" min="0" />
+            </div>
+            <div id="distance-input">
+                <label for="distance">Distance (in miles):</label>
+                <input type="number" id="distance" name="distance" min="0" />
+            </div>    
+            <div id="rpe-input">
+                <label for="rpe">Rate of Percieved Effort (RPE):</label>
+                <input type="number" id="rpe" name="rpe" min="0" max="10" />
+            </div>
+            <div id="notes-input">
+                <label for="notes">Notes:</label>
+                <textarea id="notes" name="notes" rows="4" cols="40"></textarea>
+            </div> 
+            <div id="submit-button">
+                <button id="submit" type="submit">Add Workout</button>
+            </div>
+           
+        </form>
+        </div>
+        <div class="workout-list">
+            <h2>Workout History</h2>
+            <ul id="workout-history">
+                <!--<li>
+                <strong>_/_/_</strong>
+                <strong>Activity:</strong> _<br />
+                <strong>Duration:</strong> _ min<br />
+                <strong>Distance:</strong> _ miles<br />
+                <strong>RPE:</strong> _<br />
+                <strong>Notes:</strong> _ <br />
+                </li>-->
+                <!--<li>
+                    <strong>3/5/2025</strong>
+                    <strong>Activity:</strong> Run<br/>
+                    <strong>Duration:</strong> 35 min<br/>
+                    <strong>Distance:</strong> 4.5 miles<br/>
+                    <strong>RPE:</strong> 4<br/>
+                    <strong>Notes:</strong> Felt easy! <br />
+                </li>
+                <li>
+                    <strong>3/6/2025</strong>
+                    <strong>Activity:</strong> Bike<br />
+                    <strong>Duration:</strong> 30 min<br />
+                    <strong>Distance:</strong> 9 miles<br />
+                    <strong>RPE:</strong> 2<br />
+                </li>
+                <li>
+                    <strong>3/5/2025</strong>
+                    <strong>Activity:</strong> Weightlift<br />
+                    <strong>Duration:</strong> 30 min<br />
+                    <strong>Distance:</strong> N/A<br />
+                    <strong>RPE:</strong> 5<br />
+                    <strong>Notes:</strong> Pull day <br />
+                    </li>-->
+            </ul>
+        
+            <div class="summary">
+                <h2>Previous Workouts</h2>
+                <p id="total-duration"><strong> Duration: </strong>0 hour(s) 0 min</p>
+                <p id="total-distance"><strong>Total Distance: </strong>0 miles</p>
+                <p id="average-rpe"><strong>Average RPE: </strong>0</p>
+            </div>
+            <div id="reset-button">
+                <button id="reset" type="reset">Reset Workout Log</button>
+            </div>
+        </div>
+    </div>
+    <script src="/workoutTracker/app.js"></script>
+    </body>
+</html>

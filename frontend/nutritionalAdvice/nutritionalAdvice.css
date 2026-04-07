@@ -1,0 +1,81 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: rgb(205, 224, 231);
+    margin: 0;
+    padding: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    box-sizing: border-box;
+    overflow-x: hidden;
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+.dashboard {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 15px;
+    background-color: rgb(205, 224, 231);
+    padding: 20px 24px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    width: 100%;
+}
+
+label {
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+input, select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+select {
+    cursor: pointer;
+}
+
+#reccomendations-dashboard {
+    background-color: rgb(255, 82, 82); 
+    padding: 15px;
+    border-radius: 8px;
+    border-left: 5px solid
+}
+
+#reccomendations-dashboard p {
+    font-weight: bold;
+    font-size: 16px;
+    margin: 5px 0;
+}
+
+@media (max-width: 600px) {
+    .dashboard {
+        max-width: 90%
+    }
+}
+
+.error {
+    color: red;
+    font-size: 0.85em;
+    display: block;
+    margin-bottom: 0.5em;
+}
+
+#chart-container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 20px;
+    text-align: center;
+}
