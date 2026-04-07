@@ -1,0 +1,10 @@
+{
+  "name": "James Rust",
+  "email": "a@gmail.com",
+  "height": "75",
+  "weight": "170",
+  "goalWeight": "190",
+  "dob": "2003-10-26",
+  "gender": "male",
+  "activityLevel": "medium"
+}
