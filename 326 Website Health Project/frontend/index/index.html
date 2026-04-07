@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/index/index.css">
+    <script type="module" src="/index/app.js"></script>
+    <title>Health Hub</title>
+  </head>
+  <body>
+    
+    <div class="dashboard">
+      
+      <div class="header">
+        <h1 style="font-size: xx-large;">Health Hub</h1>
+        
+      </div>
+
+      
+      <div class="sidebar">
+        <!-- <img src="HealthHub Logo.png"> -->
+        <h2 style="font-size: xx-large;">Features</h2> <!--Each Feature has hover background change, -->
+        <p style="font-size: larger;">                 <!-- and changes the main content when clicked-->
+        <span class="clickable" id="main">Main Page</span><br> 
+        <span class="clickable" id="food">Food Tracker</span><br>
+        <span class="clickable" id="work">Workouts</span><br>
+        <span class="clickable" id="nutrition">Nutritional Advice</span>
+        <span class="clickable" id="workTrack">Workout Tracker</span>
+        </p>
+        
+      </div>
+
+      
+      <div class="main-content">
+        <!-- <h2>Main Content Area</h2>-->
+        
+        <div class="view">
+          <!-- Each Main content view below, simply empty webpages rn-->
+          <div id="main-page" style="display: none;">
+
+            <iframe id="mainPageFrame" src="/mainPage/mainPage.html" style="width: 100%; height: 850px; border: none;"></iframe>
+          </div>
+
+          <div id="food-tracker" style="display: none;">
+            <iframe id="foodTrackerFrame" src="/foodTracker/UIFoodTracker.html" style="width: 100%; height: 850px; border: none;"></iframe>
+          </div>
+
+          <div id="workouts" style="display: none;">
+            <iframe id="workoutsFrame" src="/exerciseSuggestions/ExerciseSuggestionsPage.html" style="width: 100%; height: 850px; border: none;"></iframe>
+          </div>
+
+          <div id="nutritional-advice" style="display: none;">
+            <iframe id="nutritionFrame" src="/nutritionalAdvice/nutritionalAdvice.html" style="width: 100%; height: 875px; border: none;"></iframe>
+          </div>
+
+          <div id="workout-tracker" style="display: none;">
+            <iframe id="workoutTrackerFrame" src="/workoutTracker/UIWorkoutTracker.html" style="width: 100%; height: 875px; border: none;"></iframe>
+          </div>
+        </div>
+      </div> 
+      <div class="footer">
+        <p>Created By:</p>
+        <p>Ava Sokolosky: <a href="mailto:asokolosky@umass.edu">asokolosky@umass.edu</a> Shruti Janardhanan: <a href="mailto:sjanardhanan@umass.edu">sjanardhanan@umass.edu</a> Samuel Warren: <a href="mailto:scwarren@umass.edu">scwarren@umass.edu</a> James Rust: <a href="mailto:jprustn@umass.edu">jprust@umass.edu</a>
+        </p>
+    </div> 
+    </div>
+
+  </body>
+</html>

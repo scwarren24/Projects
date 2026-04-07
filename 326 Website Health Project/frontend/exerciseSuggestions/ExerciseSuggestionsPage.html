@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="ExerciseSuggestionsPage.css">
+    <script src="ExerciseSuggestionsPage.js"></script>
+
+    <title>Exercise Suggestions Page</title>
+  </head>
+  <body><div class="main-content">
+    <div class="container">
+        <h1>Workout Suggestions</h1>
+        <div class="search-filter">
+          <div class="command-bar">
+              <input type="text" id="searchInput" placeholder="Search exercises...">
+              <select id="filterSelect">
+                <option value="all">All Exercises</option>
+                <option value="legs">Legs</option>
+                <option value="arms">Arms</option>
+                <option value="back">Back</option>
+                <option value="shoulders">Shoulders</option>
+                <option value="chest">Chest</option>
+                <option value="core">Core</option>
+              </select>
+              <button id="addCardBtn" class="add-card-button">+ Add Exercise</button>
+          </div>
+          
+          </div>
+        
+
+        <div class="exercise-grid" id="exerciseGrid">
+            
+    </div>
+  <div id="videoModal" class="modal hidden">
+    <div class="modal-content">
+      <span id="closeVideoModal" class="close">&times;</span>
+      <iframe id="videoFrame" width="560" height="315" frameborder="0" allowfullscreen></iframe>
+    </div>
+  </div>
+    <div id="addCardModal" class="modal hidden">
+      <div class="modal-content">
+        <span class="close-button" id="closeModal">&times;</span>
+        <h2>Add New Exercise</h2>
+        <form id="addCardForm">
+          <input type="text" id="exerciseName" placeholder="Exercise Name" required />
+          <select id="exerciseCategory">
+            <option value="legs">Legs</option>
+            <option value="arms">Arms</option>
+            <option value="shoulders">Shoulders</option>
+            <option value="back">Back</option>
+            <option value="chest">Chest</option>
+            <option value="core">Core</option>
+          </select>
+          <select id="exerciseDifficulty">
+            <option value="easy">Easy</option>
+            <option value="medium">Medium</option>
+            <option value="hard">Hard</option>
+          </select>
+          <input type="text" id="exerciseGoal" placeholder="Goal (e.g. Strength)" required />
+          <input type="text" id="exerciseVideo" name="exerciseVideo" placeholder="https://...">
+          <div class="pb-tag-input">
+          <input type="text" id="exercisePBText" placeholder="e.g. 100kg, 8 reps" class="pb-text-field" />
+        </div>
+          <button type="submit">Add</button>
+
+        </form>
+      </div>
+    </div>
+    <div id="editCardModal" class="modal hidden">
+      <div class="modal-content">
+        <span class="close-button" id="closeEditModal">&times;</span>
+        <h2>Edit Exercise</h2>
+        <form id="editCardForm">
+          <input type="hidden" id="editExerciseId" />
+          <input type="text" id="editExerciseName" placeholder="Exercise Name" required />
+          <select id="editExerciseCategory">
+            <option value="legs">Legs</option>
+            <option value="arms">Arms</option>
+            <option value="shoulders">Shoulders</option>
+            <option value="back">Back</option>
+            <option value="chest">Chest</option>
+            <option value="core">Core</option>
+          </select>
+          <select id="editExerciseDifficulty">
+            <option value="easy">Easy</option>
+            <option value="medium">Medium</option>
+            <option value="hard">Hard</option>
+          </select>
+          <input type="text" id="editExerciseGoal" placeholder="Goal (e.g. Strength)" required />
+          <input type="text" id="editExerciseVideo" name="editExerciseVideo" placeholder="https://...">
+          <div class="pb-tag-input">
+              Personal Best
+            </label>
+            <input type="text" id="editExercisePBText" placeholder="e.g. 100kg, 8 reps" class="pb-text-field" />
+          </div>
+          
+          <button type="submit">Save Changes</button>
+        </form>
+      </div>
+    </div>
+    
+    
+   
+    
+</div>
+
+    
+</body>
+</html>

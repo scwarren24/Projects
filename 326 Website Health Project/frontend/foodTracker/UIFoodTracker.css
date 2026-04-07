@@ -1,0 +1,215 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: rgb(205, 224, 231);
+    color: #333;
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+input, select, button {
+    font-family: inherit;
+    font-size: 14px;
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    color: #333;
+}
+
+button {
+    background-color: rgb(255, 82, 82);
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: rgb(220, 50, 50);
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: rgb(205, 224, 231);
+    margin: 0;
+    padding: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    box-sizing: border-box;
+    overflow-x: hidden;
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+input, select, button {
+    font-family: inherit;
+    font-size: 14px;
+    padding: 8px;
+    margin-bottom: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+button {
+    background-color: rgb(255, 82, 82);
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: rgb(220, 50, 50);
+}
+
+body {
+    /* display: flex;
+    justify-content: left;
+    align-items: center; 
+    height: 100px; */
+    background-color: rgb(205, 224, 231); /* same as the main content in the main UI design*/
+
+    
+    margin-top: 20px; 
+    display: grid;
+    background-color: rgb(205, 224, 231);
+    grid-template-columns: 1fr 1fr 1fr; 
+    grid-template-rows: 1fr;
+    
+    gap: 10px; 
+    height: 100vh;
+    overflow: hidden;
+
+    
+}
+
+
+.search {
+    grid-column: 1;
+    grid-row: 1;
+    text-align: center; 
+    padding: 10px;
+    border: none;
+    /* border-radius: 10px; */
+    background-color: rgb(255, 255, 255);
+    /* height: 400px; */
+    /* margin-left: 150px; */
+    /* box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); */
+    /* border: 2ex; */
+
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    
+}
+.search .searchbar{
+    padding: 10px;
+    background-color: rgb(255, 255, 255);
+    /* width: 300px; */
+    text-align: center;
+    /* border: 1px solid gray; */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    
+}
+
+.nutrients{
+    grid-row: 1;
+    grid-column: 3;
+    text-align: center;
+    padding: 10px;
+    border: none;
+    /* margin-left: 50px; */
+    /* height: 400px; */
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+.nutrients .trackers{
+    padding: 10px;
+    background-color: white;
+    /* border: 1px solid gray; */
+    /* text-align:justify; */
+    display: flex;
+    flex-direction: column; /* Stacks items vertically */
+    gap: 10px; /* Adds spacing between rows */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+
+}
+.nutrients .trackers div {
+    display: flex;
+    align-items: center; /* Aligns text and progress bar */
+    justify-content: space-between; /* Keeps label on left, bar on right */
+    width: 100%; /* Makes sure everything is aligned */
+    /* box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); */
+}
+
+.nutrients .trackers label {
+    flex: 1; /* Labels take up equal width */
+    text-align: left; /* Ensures left alignment */
+    font-size:large;
+}
+
+.nutrients .trackers progress {
+    flex: 2; /* Gives progress bars more space */
+    width: 100%; /* Makes sure bars align properly */
+}
+
+.food-list{
+    grid-column: 2;
+    grid-row: 1;
+    padding: 10px;
+    background-color: rgb(255, 255, 255);
+
+    color: black;
+    height: auto;
+    text-align: center;
+    padding: 10px;
+    /* border: 4px solid #000; */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.food-list .food-items {
+    
+    background-color: white;
+    /* border: 2px solid #000; */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+
+}
+.food-list .food-items ul{
+    font-size: large;
+}
+.food-list .food-items ul li:hover{
+    text-decoration: line-through;
+}
+#results {
+    white-space: pre-wrap;   
+    word-break: break-word; 
+    overflow: auto;          
+    max-height: 500px;       
+    text-align: left;       
+    padding: 10px;
+  }
+
+#resultsDisplay {
+    text-align: left;
+}
+#resultsDisplay li:hover{
+    background-color: rgb(210, 210, 210);
+  }
+
+
+progress {
+    --progress-color: green; 
+    background-color: white;
+}
+
+progress::-webkit-progress-value {
+    background-color: var(--progress-color);
+}
+
+progress::-moz-progress-bar {
+    background-color: var(--progress-color);
+}

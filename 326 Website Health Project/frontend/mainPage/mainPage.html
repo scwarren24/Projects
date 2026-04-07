@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="/mainPage/mainPage.css">
+    <script type="module" src="../index/app.js"></script>
+    <script type="module" src="/mainPage/mainPage.js"></script>
+    <title>Account Information</title>
+  </head>
+  <body>
+    <div class="account-container">
+        <h2>Account Information</h2>
+        <form class="account-form">
+            <div class="form-group">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" readonly>
+                <span class="error" id="name-error"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" placeholder="example@ex.com" readonly>
+                <span class="error" id="email-error"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="height">Height (in)</label>
+                <input type="number" id="height" readonly>
+                <span class="error" id="height-error"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="weight">Current Weight (lb)</label>
+                <input type="number" id="weight" readonly>
+                <span class="error" id="weight-error"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="goal-weight">Goal Weight (lb)</label>
+                <input type="number" id="goal-weight" readonly>
+                <span class="error" id="goal-error"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="dob">Date of Birth</label>
+                <input type="date" id="dob" readonly>
+                <span class="error" id="dob-error"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="gender">Gender</label>
+                <select id="gender" disabled>
+                    <option value="" disabled selected>Select</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="prefer-not">Prefer not to say</option>
+                </select>
+                <span class="error" id="gender-error"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="activity-level">Activity Level</label>
+                <select id="activity-level" disabled>
+                    <option value="" disabled selected>Select</option>
+                    <option value="low">Low: Spend most of your days sitting</option>
+                    <option value="medium">Medium: Spend most of your days lightly active</option>
+                    <option value="high">High: Spend a good part of your days doing some physical activity</option>
+                </select>
+                <span class="error" id="activity-error"></span>
+            </div>
+
+            <button type="button" id="edit-button" class="edit-button">Edit</button>
+            <button type="submit" id="save-button" class="save-button" disabled>Save Changes</button>
+        </form>
+    </div>
+    <script type="module" src="../service/formSync.js"></script>
+    <script type="module" src="mainPage.js"></script>
+    <script type="module" src="../UIDesign/app.js"></script>
+  </body>
